@@ -1,0 +1,36 @@
+R cheat sheet :
+
+Data input:
+data=read.table("C:\\Users\\james\\Desktop\\R play\\data.csv",header=T,sep=",") 
+data=read.table(file.choose(),header=T,sep=",")
+
+Data inspection:
+str
+head
+fix
+names
+
+Data analysis:
+mean
+var
+summary
+
+Plotting:
+attach(data) /*Extracts columns from data frames as variables
+boxplot(data$T11.4A,data$T11.4B)
+boxplot(T11.4A,T11.4B)
+boxplot(data[,grepl("^T11.4",colnames(data))])
+hist
+ylim=c(0,max(data))
+library(RColorBrewer)
+
+Graphics:
+png(file="name.png",width=800,height=800)
+
+Data fitting:
+speedmodel=lm(dist~speed)
+summary(speedmodel)
+
+
+
+
