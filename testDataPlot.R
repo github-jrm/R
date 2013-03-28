@@ -22,15 +22,15 @@ multi.sapply = function(...) {
 #fixme: Auto t test matrix
 #fixme: Autocorrelation spectrum
 
-boxplotMain="Dispense accuracy: Volume [uL]"
-testGrepStr = "^T11.3"
-setTestNamesOveride = F
-testNamesOveride = c("T11.4D","T11.4I")
+boxplotMain="Temperature [*C]"
+testGrepStr = "^T10.2D"
+setTestNamesOveride = T
+testNamesOveride = c("T10.2C.T90.900s.Max","T10.2D.T90.900s.Max.S1.S5","T10.2D.T90.900s.Max.S6.S10","T10.2D.T90.900s.Max.S11.S15")
 summaryStatsRound = 1
-setAbline = F
-ablineMin = 90
-ablineMax = 110
-ablineNom = 100
+setAbline = T
+ablineMin = 55
+ablineMax = 57
+ablineNom = 56
 
 marDefault = c(5.1,4.1,4.1,2.1)
 layoutHeights = c(2,1)
@@ -41,6 +41,8 @@ dev.new()
 dev.1 = as.integer(dev.cur())
 dev.new()
 dev.2 = as.integer(dev.cur())
+dev.new()
+dev.3 = as.integer(dev.cur())
 
 dev.set(dev.1)
 
@@ -78,7 +80,7 @@ if (setAbline) {
 }
 
 summaryStats = data.frame(sapply(testData,nobs),multi.sapply(na.omit(testData),mean,sd,min,max))
-colnames(summaryStats) = c("N","Mean","SD","Min","Max")
+colnames(summaryStats) = c("N","Average","Standard deviation","Minimum","Maximum")
 textplot(round(t(summaryStats),summaryStatsRound),cmar=0.4)
 
 for(i in 1:Ntests){
@@ -98,3 +100,8 @@ for(i in 1:Ntests){
   qqnorm(testDataIasNum,main=mainTxt)
   qqline(testDataIasNum)
 }
+
+dev.set(dev.3)
+textplot(round(t(summaryStats),summaryStatsRound),cmar=0.4)
+
+
